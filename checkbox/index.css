@@ -1,0 +1,79 @@
+
+:root {
+
+    --base-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --base-padding: 4px;
+    --base-border-radius: 4px;
+    --base-font-size: 16px;
+
+    /*  Checkbox styles  */
+    --checkbox-outline-color: #5E9ED6;
+    --checkbox-background-color: #0A0A0A;
+    --checkbox-size: 16px;
+    --checkbox-text-color: #FFFFFF;
+
+    /* Header styles */
+    --header-font-size: 2rem;
+    --header-margin-bottom: 20px;
+    --header-font-weight: 700;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: var(--base-font-family);
+    font-size: var(--base-font-size);
+    padding: var(--base-padding);
+}
+
+.headline {
+    font-size: var(--header-font-size);
+    font-weight: var(--header-font-weight);
+    margin-bottom: var(--header-margin-bottom);
+}
+
+.checkbox {
+    border: 2px solid var(--checkbox-background-color);
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+    outline: var(--checkbox-outline-color);
+    display: flex;
+    flex-shrink: 0;
+    flex-grow: 0;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--base-border-radius);
+    position: relative;
+    color: var(--checkbox-text-color);
+}
+
+.checkbox:has(input[type="checkbox"]:focus) {
+    outline: 2px solid var(--checkbox-outline-color);
+    outline-offset: 2px;
+}
+
+.checkbox input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    right: -48px;
+}
+
+.checkbox img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    visibility: hidden;
+}
+
+.checkbox:has(input[type="checkbox"]:checked) {
+    border-color: var(--checkbox-background-color);
+    background-color: var(--checkbox-background-color);
+    color: var(--checkbox-text-color);
+}
+
+.checkbox input[type="checkbox"]:checked + .checkmark {
+    visibility: visible;
+}
