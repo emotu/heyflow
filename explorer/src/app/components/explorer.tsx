@@ -128,16 +128,23 @@ const JSONExplorer: React.FC<ExplorerProps> = ({ initialData = {} }) => {
             <div className="flex flex-row justify-between space-x-4 items-start w-full">
                 {/* Property Input Component */}
                 <Input
+                    name={"property"}
                     label={"Property"}
                     placeholder={"res.path.property"}
                     value={propertyKey}
-                    onChange={setPropertyKey}
+                    onChange={(value) => setPropertyKey(value?.trim())}
                     propertyValue={propertyValue}
                 />
                 <span className="h-ful pt-10">
                     <ArrowRightIcon strokeWidth={2} className="h-6 w-6" />
                 </span>
-                <Input label={"Block / Variable"} placeholder={"Variable"} value={variable} onChange={setVariable} />
+                <Input
+                    name={"variable"}
+                    label={"Block / Variable"}
+                    placeholder={"Variable"}
+                    value={variable}
+                    onChange={setVariable}
+                />
                 <span className="h-full pt-8 text-gray-500">
                     <MiniButton>
                         <MinusIcon strokeWidth={2} className="h-6 w-6" />
