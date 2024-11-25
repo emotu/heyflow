@@ -1,6 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ArrowRightIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import Input from "./input";
+import Button, { MiniButton } from "./button";
+import { getObjectValue } from "@app/app/utils";
 
 interface ResponseProps {
     res: object;
@@ -21,13 +24,6 @@ const JSONExplorer: React.FC<ExplorerProps> = ({ initialData = {} }) => {
     }, [initialData]);
 
     useEffect(() => {
-        const getObjectValue = (obj: ResponseProps | undefined, path: string): any => {
-            const keys = path.match(/[^.[\]]+/g);
-
-            if (!keys) return undefined;
-
-            return keys.reduce((acc: any, key: string | number) => (acc !== undefined ? acc[key] : undefined), obj);
-        };
         const propValue = getObjectValue(data, propertyKey);
         if (
             ["string", "boolean", "Date", "number", "undefined"].includes(typeof propValue) ||
@@ -37,6 +33,13 @@ const JSONExplorer: React.FC<ExplorerProps> = ({ initialData = {} }) => {
         }
     }, [propertyKey]);
 
+    /**
+     * Recursively walk the node / data object until all values are rendered.
+     * It takes into handles various data types (number, string, boolean, date, array & dictionary) accordingly,
+     * deciding how to handle each block as it goes through each attribute it finds.
+     * @param node - attribute / node to evaluate
+     * @param parentKey - attribute key (e.g. res.name)
+     */
     const renderNode = (node: any, parentKey: string = ""): React.ReactNode => {
         const buildBlock = (item: any) => {
             const isArray = Array.isArray(item);
@@ -88,7 +91,7 @@ const JSONExplorer: React.FC<ExplorerProps> = ({ initialData = {} }) => {
             } else {
                 return (
                     <ul className="px-6">
-                        {Object.entries(node).map(([key, item]: [string, any], idx: number) => {
+                        {Object.entries(node).map(([key, item]: [string, unknown], idx: number) => {
                             const { blockStart, blockEnd, ignoreClick } = buildBlock(item);
                             const currentKey = [parentKey, key].filter(Boolean).join(".");
 
@@ -96,6 +99,7 @@ const JSONExplorer: React.FC<ExplorerProps> = ({ initialData = {} }) => {
                                 <li className="" key={`${parentKey}.${idx}`}>
                                     <span>
                                         <span
+                                            id={currentKey}
                                             onClick={() =>
                                                 !ignoreClick && setPropertyKey(["res", currentKey].join("."))
                                             }
@@ -120,49 +124,35 @@ const JSONExplorer: React.FC<ExplorerProps> = ({ initialData = {} }) => {
 
     return (
         <div className="flex flex-col w-full space-y-8">
+            {/*Headline input sections */}
             <div className="flex flex-row justify-between space-x-4 items-start w-full">
-                {/* Input Component */}
-                <fieldset className="flex flex-1 flex-col space-y-1">
-                    <label className="text-gray-500" htmlFor="property">
-                        Property
-                    </label>
-                    <input
-                        className="px-4 h-12 border border-gray-300 rounded-lg w-full"
-                        type="text"
-                        placeholder={"res.path.to.property"}
-                        value={propertyKey}
-                        onChange={(e) => setPropertyKey(e.target.value)}
-                    />
-                    <span className="text-gray-500">{propertyValue}</span>
-                </fieldset>
-                <span className="w-8 h-full pt-9 flex flex-col flex-shrink-0 justify-center items-center">
+                {/* Property Input Component */}
+                <Input
+                    label={"Property"}
+                    placeholder={"res.path.property"}
+                    value={propertyKey}
+                    onChange={setPropertyKey}
+                    propertyValue={propertyValue}
+                />
+                <span className="h-ful pt-10">
                     <ArrowRightIcon strokeWidth={2} className="h-6 w-6" />
                 </span>
-                <fieldset className="flex flex-1 flex-col space-y-1">
-                    <label className="text-gray-500" htmlFor="property">
-                        Block / Variable
-                    </label>
-                    <input
-                        className="px-4 h-12 border border-gray-300 rounded-lg w-full"
-                        type="text"
-                        placeholder={"Variable"}
-                        value={variable}
-                        onChange={(e) => setVariable(e.target.value)}
-                    />
-                </fieldset>
-                <span className="w-8 h-full pt-9 flex text-gray-500 flex-col flex-shrink-0 justify-center items-center">
-                    <MinusIcon strokeWidth={2} className="h-6 w-6" />
+                <Input label={"Block / Variable"} placeholder={"Variable"} value={variable} onChange={setVariable} />
+                <span className="h-full pt-8 text-gray-500">
+                    <MiniButton>
+                        <MinusIcon strokeWidth={2} className="h-6 w-6" />
+                    </MiniButton>
                 </span>
             </div>
             <div className="space-y-6 px-4">
-                <button className="flex font-medium cursor-pointer text-gray-500 transition-colors ease-in-out duration-150 hover:text-blue-600 flex-row justify-center items-start space-x-2">
+                <Button>
                     <PlusIcon strokeWidth={2} className="h-6 w-6" />
                     <span>Assign to variable</span>
-                </button>
-                <button className="flex font-medium cursor-pointer text-gray-500 transition-colors ease-in-out duration-150 hover:text-blue-600 flex-row justify-center items-start space-x-2">
+                </Button>
+                <Button>
                     <PlusIcon strokeWidth={2} className="h-6 w-6" />
                     <span>Assign to block</span>
-                </button>
+                </Button>
             </div>
             <fieldset className="flex flex-1 flex-col space-y-1">
                 <label className="text-gray-500" htmlFor="property">
