@@ -1,4 +1,4 @@
-import JSONExplorer from "@app/components/explorer";
+import JSONExplorer from "@app/app/components/Explorer";
 
 const demoJSON = {
     date: "2021-10-27T07:49:14.896Z",
