@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Heyflow Coding Challenge
+___
 
-## Getting Started
+This repository contains the response to 2 Heyflow coding challenges:
+1. [Custom Checkbox](https://github.com/emotu/heyflow/checkbox)
+2. [JSON Explorer](https://github.com/emotu/heyflow/explorer)
 
-First, run the development server:
+Both the code for challenges are implemented in this repository as a way to organize the results. 
+As such, there is no relationship between both directories and they can be reviewed independently.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Custom Checkbox
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Project folder - [Custom Checkbox](https://github.com/emotu/heyflow/checkbox)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This is implemented as a simple HTML / CSS web page and no javascript was required to complete the task. 
+No frameworks or libraries are utilized in the implementation. 
 
-## Learn More
+Files to review include:
+- checkbox/index.html
+- checkbox/index.css
 
-To learn more about Next.js, take a look at the following resources:
+## JSON Explorer
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Project folder - [JSON Explorer](https://github.com/emotu/heyflow/explorer)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The JSON Explorer is implemented as a React functional component written in Typescript, with [Next.JS](https://nextjs.org) as web app scaffolding, 
+and [Tailwind](https://tailwindcss.com) as CSS for styling.
 
-## Deploy on Vercel
+Files to review include:
+- src/app/components/explorer.tsx -- JSONExplorer (main)
+- src/app/components/buttons.tsx -- Buttons used in JSONExplorer
+- src/app/components/input.tsx -- Input fields used in JSONExplorer
+- src/app/page.tsx -- NextJS index page
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+

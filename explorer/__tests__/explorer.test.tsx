@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import JSONExplorer from "./explorer";
+import JSONExplorer from "@app/app/components/explorer";
 
+// TODO: Write tests
 describe("JSON Explorer Tests", () => {
-    it("renders correctly", () => {
+    test("renders correctly", () => {
         render(<JSONExplorer initialData={{}} />);
     });
 });

@@ -5,7 +5,7 @@ interface ButtonProps {
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, onClick }): React.ReactNode => {
+const Buttons: React.FC<ButtonProps> = ({ children, onClick }): React.ReactNode => {
     return (
         <button
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => onClick?.(e)}
@@ -27,6 +27,6 @@ const MiniButton: React.FC<ButtonProps> = ({ children, onClick }): React.ReactNo
     );
 };
 
-export default Button;
+export default Buttons;
 
 export { MiniButton };

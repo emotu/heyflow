@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { ArrowRightIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Input from "./input";
-import Button, { MiniButton } from "./button";
+import Buttons, { MiniButton } from "./buttons";
 import { getObjectValue } from "@app/app/utils";
 
 interface ResponseProps {
@@ -152,14 +152,14 @@ const JSONExplorer: React.FC<ExplorerProps> = ({ initialData = {} }) => {
                 </span>
             </div>
             <div className="space-y-6 px-4">
-                <Button>
+                <Buttons>
                     <PlusIcon strokeWidth={2} className="h-6 w-6" />
                     <span>Assign to variable</span>
-                </Button>
-                <Button>
+                </Buttons>
+                <Buttons>
                     <PlusIcon strokeWidth={2} className="h-6 w-6" />
                     <span>Assign to block</span>
-                </Button>
+                </Buttons>
             </div>
             <fieldset className="flex flex-1 flex-col space-y-1">
                 <label className="text-gray-500" htmlFor="property">
