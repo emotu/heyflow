@@ -63,8 +63,8 @@ describe("JSONExplorer Component Tests", () => {
 
     it("renders arrays and objects properly", () => {
         render(<JSONExplorer initialData={mockData} />);
-        expect(screen.getByText("[")).toBeInTheDocument();
-        expect(screen.getByText("{")).toBeInTheDocument();
+        expect(screen.getByText(": [")).toBeInTheDocument();
+        expect(screen.getByText(": {")).toBeInTheDocument();
     });
 
     it("updates the variable input when modified", () => {
