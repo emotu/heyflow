@@ -1,6 +1,19 @@
 import JSONExplorer from "@app/app/components/explorer";
 
-const demoJSON = {
+const demoData = {
+    date: "2021-10-27T07:49:14.896Z",
+    hasError: false,
+    fields: [
+        {
+            id: "4c212130",
+            prop: "iban",
+            value: "DE81200505501265402568",
+            hasError: false
+        }
+    ]
+};
+
+const nestedJSON = {
     date: "2021-10-27T07:49:14.896Z",
     hasError: false,
     fields: [
@@ -83,7 +96,7 @@ export default function Home() {
                 <div className="text-2xl font-bold tracking-tight">JSON Explorer</div>
             </header>
             <main className="flex flex-col mx-auto w-full max-w-screen-lg">
-                <JSONExplorer initialData={sampleJSON} />
+                <JSONExplorer initialData={nestedJSON} />
             </main>
         </div>
     );

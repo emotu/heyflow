@@ -7,7 +7,7 @@ interface InputProps {
     type?: string;
     placeholder?: string;
     propertyValue?: string;
-    onChange: (value?: string) => void;
+    onChange: (value: string) => void;
 }
 
 const Input: React.FC<InputProps> = ({

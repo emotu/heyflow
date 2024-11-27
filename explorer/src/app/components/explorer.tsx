@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { ArrowRightIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Input from "./input";
@@ -14,7 +15,7 @@ interface ExplorerProps {
 }
 
 const JSONExplorer: React.FC<ExplorerProps> = ({ initialData = {} }) => {
-    const [data, setData] = useState<ResponseProps>();
+    const [data, setData] = useState<ResponseProps>({ res: initialData });
     const [propertyKey, setPropertyKey] = useState<string>("");
     const [propertyValue, setPropertyValue] = useState<string>("");
     const [variable, setVariable] = useState<string>("");
@@ -31,7 +32,7 @@ const JSONExplorer: React.FC<ExplorerProps> = ({ initialData = {} }) => {
         ) {
             setPropertyValue(String(propValue));
         }
-    }, [propertyKey]);
+    }, [propertyKey, data]);
 
     /**
      * Recursively walk the node / data object until all values are rendered.
@@ -40,8 +41,8 @@ const JSONExplorer: React.FC<ExplorerProps> = ({ initialData = {} }) => {
      * @param node - attribute / node to evaluate
      * @param parentKey - attribute key (e.g. res.name)
      */
-    const renderNode = (node: any, parentKey: string = ""): React.ReactNode => {
-        const buildBlock = (item: any) => {
+    const renderNode = (node: unknown, parentKey: string = ""): React.ReactNode => {
+        const buildBlock = (item: unknown) => {
             const isArray = Array.isArray(item);
             const isObject =
                 typeof item === "object" &&
@@ -64,7 +65,7 @@ const JSONExplorer: React.FC<ExplorerProps> = ({ initialData = {} }) => {
             return { blockStart, blockEnd, ignoreClick };
         };
 
-        const renderValue = (value: any) => {
+        const renderValue = (value: unknown) => {
             if (["boolean", "number"].includes(typeof value)) {
                 return <span className="text-pink-600">{`${String(value)},`}</span>;
             } else {
@@ -76,7 +77,7 @@ const JSONExplorer: React.FC<ExplorerProps> = ({ initialData = {} }) => {
             if (Array.isArray(node)) {
                 return (
                     <ul className="px-6">
-                        {node.map((item: any, idx: number) => {
+                        {node.map((item: unknown, idx: number) => {
                             const { blockStart, blockEnd } = buildBlock(item);
                             return (
                                 <li key={`${parentKey}.${idx}`}>
