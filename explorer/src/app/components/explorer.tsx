@@ -6,6 +6,8 @@ import Input from "./input";
 import Buttons, { MiniButton } from "./buttons";
 import { getObjectValue } from "@app/app/utils";
 
+
+// Use a JSON standard typescript interface
 interface ResponseProps {
     res: object;
 }
